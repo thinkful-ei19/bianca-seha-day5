@@ -7,11 +7,35 @@ const STORE = [
 //responsible for storing underlying data 
 //an array of objects 
 //with a checked property that indicates if it has a line through it
+function generateItemElemet(item, itemIndex, template){
+    return `
+    <li class="js-item-index-element" data-item-index="${itemIndex}">
+        <span class="shopping-item js-shopping-item ${item.checked ? " shopping-item__checked" : ''}">${item.name}</span>
+        <div class="shopping-item-controls">
+            <button class="shopping-item-toggle js-item-toggle">
+                <span class="button-label">check</span>
+            </button>
+            <button class="shopping-item-delete js-item-delete">
+                <span class="button-label">delete</span>
+            </button>
+        </div>
+    </li >`;
+}
 
+
+function generateShoppingItemString(shoppingList) {
+    console.log('Genarating shopping list element');
+    const items = shoppingList.map(item, index) =>generateItemElement(item, index));
+    retun items.join(" ");
+}
 
 function renderShoppingList(){
     // rendering shopping list to dom
     console.log('`renderShoppingList` ran');
+    const shoppingListItemString = generateShoppingItemString(STORE);
+    /inserting HTML code in the dom
+    $('.js-shopping-list').html(shoppingListItemsString);
+
 }
 function handleNewItemSubmit(){
     //responsible when users add new item to list
